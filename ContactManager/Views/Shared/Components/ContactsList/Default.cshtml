@@ -1,0 +1,25 @@
+﻿<div class="toolbar">
+    <input type="text" id="filterInput" placeholder="Search contacts..." />
+    <select id="sortSelect" class="btn">
+        <option value="name-asc">Sort by: Name (A-Z)</option>
+        <option value="name-desc">Sort by: Name (Z-A)</option>
+        <option value="salary-desc">Sort by: Salary (High-Low)</option>
+        <option value="salary-asc">Sort by: Salary (Low-High)</option>
+    </select>
+</div>
+<table id="contactsTable" border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th data-sort="name" style="cursor:pointer;">Name</th>
+            <th data-sort="dateofbirth" style="cursor:pointer;">Date of Birth</th>
+            <th data-sort="married" style="cursor:pointer;">Married</th>
+            <th data-sort="phone" style="cursor:pointer;">Phone</th>
+            <th data-sort="salary" style="cursor:pointer;">Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="contactsTableBody">
+    </tbody>
+</table>
+
+<div id="pagination"></div>

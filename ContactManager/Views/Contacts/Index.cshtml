@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Contacts";
+}
+
+<h2>Contact Manager</h2>
+
+@if (TempData["Success"] != null)
+{
+    <p style="color: green;">@TempData["Success"]</p>
+}
+@if (TempData["Error"] != null)
+{
+    <p style="color: red;">@TempData["Error"]</p>
+}
+
+<div class="page-title">
+    <h1>Contacts</h1>
+    <p>View, edit, and manage your contact list</p>
+</div>
+
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-icon icon-green">👥</div>
+        <div>
+            <div class="stat-label">Total Contacts</div>
+            <div class="stat-value" id="statTotal">-</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon icon-green">⬆</div>
+        <div>
+            <div class="stat-label">Imported Records</div>
+            <div class="stat-value" id="statImported">-</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon icon-orange">📅</div>
+        <div>
+            <div class="stat-label">Last Updated</div>
+            <div class="stat-value" id="statUpdated">-</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon icon-red">🗑</div>
+        <div>
+            <div class="stat-label">Deleted Records</div>
+            <div class="stat-value" id="statDeleted">0</div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <form asp-action="UploadCsv" method="post" enctype="multipart/form-data" class="toolbar">
+        <label class="file-upload-label">
+            <input type="file" name="csvFile" accept=".csv" required id="csvFileInput" onchange="updateFileName(this)" />
+            <span id="fileNameDisplay">Choose CSV file</span>
+        </label>
+        <button type="submit" class="btn btn-primary">⬆ Upload CSV</button>
+    </form>
+<hr />
+
+@await Component.InvokeAsync("ContactsList")
+
+</div>
+
+@section Scripts {
+    <script src="~/js/contacts.js"></script>
+}
