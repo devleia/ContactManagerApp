@@ -19,6 +19,7 @@ namespace ContactManager.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadCsv(IFormFile csvFile)
         {
             if (csvFile == null || csvFile.Length == 0)
@@ -102,13 +103,14 @@ namespace ContactManager.Controllers
             return Json(new { data = items, total, page, pageSize });
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteContact([FromForm] int id)
         {
             await _repository.DeleteContactAsync(id);
             return Json(new { success = true });
         }
         [HttpPost]
-        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateContact([FromBody] Contact contact)
         {
             if (!ModelState.IsValid)

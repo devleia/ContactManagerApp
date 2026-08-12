@@ -2,6 +2,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ContactManager.Data.DapperContext>();
 builder.Services.AddScoped<ContactManager.Data.IContactRepository, ContactManager.Data.ContactRepository>();
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-CSRF-TOKEN";
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

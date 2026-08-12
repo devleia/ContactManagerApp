@@ -1,4 +1,5 @@
-﻿let currentFilter = '';
+﻿const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+let currentFilter = '';
 let currentSortBy = 'name';
 let currentSortDir = 'asc';
 let currentContacts = [];
@@ -105,7 +106,10 @@ async function saveContact(id) {
 
     const response = await fetch('/Contacts/UpdateContact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
         body: JSON.stringify(updated)
     });
 
@@ -172,7 +176,10 @@ async function deleteContact(id) {
 
     await fetch('/Contacts/DeleteContact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRF-TOKEN': csrfToken
+        },
         body: formData.toString()
     });
     deletedCount++;
